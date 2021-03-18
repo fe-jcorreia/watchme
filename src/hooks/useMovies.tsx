@@ -14,6 +14,7 @@ interface GenreResponseProps {
 }
 
 interface MovieProps {
+  imdbID: string;
   Title: string;
   Poster: string;
   Ratings: Array<{
@@ -41,9 +42,9 @@ export function MoviesProvider({ children }: MoviesProviderProps) {
   const [genres, setGenres] = useState<GenreResponseProps[]>([]);
   const [selectedGenreId, setSelectedGenreId] = useState(1);
   const [movies, setMovies] = useState<MovieProps[]>([]);
-  const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>(
-    {} as GenreResponseProps
-  );
+  const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>({
+    name: "action",
+  } as GenreResponseProps);
 
   useEffect(() => {
     api.get<GenreResponseProps[]>("genres").then((response) => {
